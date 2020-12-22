@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import "package:google_maps_webservice/places.dart";
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_client/helpers/constants.dart';
 import 'package:taxi_client/helpers/screen_navigation.dart';
 import 'package:taxi_client/helpers/style.dart';
 import 'package:taxi_client/providers/app_state.dart';
 import 'package:taxi_client/providers/user.dart';
+import 'package:taxi_client/screens/trips_history_screen.dart';
 import 'package:taxi_client/widgets/custom_text.dart';
 import 'package:taxi_client/widgets/destination_selection.dart';
 import 'package:taxi_client/widgets/driver_found.dart';
@@ -39,17 +40,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _deviceToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    UserProvider _user = Provider.of<UserProvider>(context, listen: false);
+    UserProvider _user =
+        provider.Provider.of<UserProvider>(context, listen: false);
 
     if (_user.userModel?.token != preferences.getString('token')) {
-      Provider.of<UserProvider>(context, listen: false).saveDeviceToken();
+      provider.Provider.of<UserProvider>(context, listen: false)
+          .saveDeviceToken();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    UserProvider userProvider = provider.Provider.of<UserProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
     return SafeArea(
       child: Scaffold(
         key: scaffoldState,
@@ -67,10 +70,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.inbox),
-                title: CustomText(text: "Отправить жалобу"),
+                leading: Icon(Icons.trip_origin),
+                title: CustomText(text: "История поездок"),
                 onTap: () {
-                  // ToDo: сделать отправку жалобы
+                  changeScreen(
+                    context,
+                    TripsHistoryScreen(),
+                  );
                 },
               ),
               ListTile(
@@ -229,8 +235,8 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
+    UserProvider userProvider = provider.Provider.of<UserProvider>(context);
 
     return appState.center == null
         ? Loading()

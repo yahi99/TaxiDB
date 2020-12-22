@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_client/helpers/constants.dart';
 import 'package:taxi_client/helpers/style.dart';
@@ -19,8 +19,8 @@ class PickupSelectionWidget extends StatelessWidget {
   const PickupSelectionWidget({Key key, this.scaffoldState}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    UserProvider userProvider = provider.Provider.of<UserProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.28,

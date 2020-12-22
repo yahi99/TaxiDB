@@ -316,7 +316,7 @@ class AppStateProvider with ChangeNotifier {
     });
     var dioRequest = Dio();
     await dioRequest.post(
-      apiUrl + '/create_trip_and_update_tripr',
+      "http://" + apiUrl + '/create_trip_and_update_tripr',
       data: {
         'request_id': requestDbId,
         'car_id': driverDbID,

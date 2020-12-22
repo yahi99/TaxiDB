@@ -3,7 +3,7 @@ import 'package:driver_app/providers/app_provider.dart';
 import 'package:driver_app/services/call_sms.dart';
 import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 
 import '../helpers/style.dart';
 import 'custom_text.dart';
@@ -13,7 +13,7 @@ class RiderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
 
     return DraggableScrollableSheet(
         initialChildSize: 0.1,

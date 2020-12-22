@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:taxi_client/providers/app_state.dart';
 import 'package:taxi_client/providers/user.dart';
 import 'package:taxi_client/screens/login.dart';
@@ -12,12 +12,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   return runApp(
-    MultiProvider(
+    provider.MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppStateProvider>.value(
+        provider.ChangeNotifierProvider<AppStateProvider>.value(
           value: AppStateProvider(),
         ),
-        ChangeNotifierProvider<UserProvider>.value(
+        provider.ChangeNotifierProvider<UserProvider>.value(
           value: UserProvider.initialize(),
         ),
       ],
@@ -36,7 +36,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    UserProvider auth = Provider.of<UserProvider>(context);
+    UserProvider auth = provider.Provider.of<UserProvider>(context);
     switch (auth.status) {
       case Status.Uninitialized:
         return Splash();

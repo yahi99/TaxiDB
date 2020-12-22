@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:taxi_client/helpers/screen_navigation.dart';
 import 'package:taxi_client/helpers/style.dart';
 import 'package:taxi_client/providers/user.dart';
@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<UserProvider>(context);
+    final authProvider = provider.Provider.of<UserProvider>(context);
 
     return Scaffold(
       key: _key,

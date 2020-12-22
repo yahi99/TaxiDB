@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:taxi_client/helpers/style.dart';
 import 'package:taxi_client/locators/service_locator.dart';
 import 'package:taxi_client/providers/app_state.dart';
@@ -13,7 +13,7 @@ class DriverFoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
 
     return DraggableScrollableSheet(
         initialChildSize: 0.2,
@@ -182,7 +182,7 @@ class DriverFoundWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "${appState?.routeModel?.endAddress}\n",
+                            "${appState?.requestedDestination}\n",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.w300,

@@ -1,18 +1,18 @@
 import 'package:driver_app/helpers/constants.dart';
 import 'package:driver_app/helpers/screen_navigation.dart';
-import 'package:driver_app/helpers/stars_method.dart';
 import 'package:driver_app/helpers/style.dart';
 import 'package:driver_app/providers/app_provider.dart';
 import 'package:driver_app/providers/user.dart';
 import 'package:driver_app/screens/login.dart';
 import 'package:driver_app/screens/ride_request.dart';
+import 'package:driver_app/screens/trip_history_screen.dart';
 import 'package:driver_app/widgets/custom_text.dart';
 import 'package:driver_app/widgets/loading.dart';
 import 'package:driver_app/widgets/rider_draggable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import "package:google_maps_webservice/places.dart";
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 GoogleMapsPlaces places = GoogleMapsPlaces(apiKey: GOOGLE_MAPS_API_KEY);
@@ -36,10 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _deviceToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    UserProvider _user = Provider.of<UserProvider>(context, listen: false);
+    UserProvider _user =
+        provider.Provider.of<UserProvider>(context, listen: false);
 
     if (_user.userModel.token != preferences.getString('token')) {
-      Provider.of<UserProvider>(context, listen: false).saveDeviceToken();
+      provider.Provider.of<UserProvider>(context, listen: false)
+          .saveDeviceToken();
     }
   }
 
@@ -47,16 +49,17 @@ class _MyHomePageState extends State<MyHomePage> {
     //    this section down here will update the drivers current position on the DB when the app is opened
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     String _id = _prefs.getString("id");
-    UserProvider _user = Provider.of<UserProvider>(context, listen: false);
+    UserProvider _user =
+        provider.Provider.of<UserProvider>(context, listen: false);
     AppStateProvider _app =
-        Provider.of<AppStateProvider>(context, listen: false);
+        provider.Provider.of<AppStateProvider>(context, listen: false);
     _user.updateUserData({"id": _id, "position": _app.position.toJson()});
   }
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
+    UserProvider userProvider = provider.Provider.of<UserProvider>(context);
     Widget home = SafeArea(
       child: Scaffold(
         key: scaffoldState,
@@ -74,13 +77,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               ListTile(
+                leading: Icon(Icons.trip_origin),
+                title: CustomText(text: "История поездок"),
+                onTap: () {
+                  changeScreen(context, TripsHistoryScreen());
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.exit_to_app),
-                title: CustomText(text: "Log out"),
+                title: CustomText(text: "Выйти"),
                 onTap: () {
                   userProvider.signOut();
                   changeScreenReplacement(context, LoginScreen());
                 },
-              )
+              ),
             ],
           ),
         ),
@@ -185,7 +195,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
     return appState.center == null
         ? Loading()
         : Stack(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:taxi_client/helpers/style.dart';
 import 'package:taxi_client/providers/app_state.dart';
 import 'package:taxi_client/providers/user.dart';
@@ -16,8 +16,8 @@ class PaymentMethodSelectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
+    UserProvider userProvider = provider.Provider.of<UserProvider>(context);
 
     return DraggableScrollableSheet(
         initialChildSize: 0.3,

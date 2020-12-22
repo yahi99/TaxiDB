@@ -3,7 +3,7 @@ import 'package:driver_app/providers/user.dart';
 import 'package:driver_app/screens/login.dart';
 import 'package:driver_app/screens/splash.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 
 import 'helpers/constants.dart';
 import 'locators/service_locator.dart';
@@ -14,12 +14,12 @@ void main() {
   setupLocator();
 
   return runApp(
-    MultiProvider(
+    provider.MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppStateProvider>.value(
+        provider.ChangeNotifierProvider<AppStateProvider>.value(
           value: AppStateProvider(),
         ),
-        ChangeNotifierProvider.value(
+        provider.ChangeNotifierProvider.value(
           value: UserProvider.initialize(),
         ),
       ],
@@ -36,7 +36,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    UserProvider auth = Provider.of<UserProvider>(context);
+    UserProvider auth = provider.Provider.of<UserProvider>(context);
 
     return FutureBuilder(
       future: initialization,

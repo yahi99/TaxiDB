@@ -68,7 +68,7 @@ class UserProvider with ChangeNotifier {
       await prefs.setBool(LOGGED_IN, true);
       var dioRequest = Dio();
       await dioRequest.post(
-        apiUrl + '/register_user',
+        "http://" + apiUrl + '/register_user',
         data: {
           'login': result.user.uid,
           'name': name.text.trim(),

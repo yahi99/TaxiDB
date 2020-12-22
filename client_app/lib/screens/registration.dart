@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:taxi_client/helpers/screen_navigation.dart';
 import 'package:taxi_client/helpers/style.dart';
 import 'package:taxi_client/providers/app_state.dart';
@@ -20,8 +20,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider authProvider = Provider.of<UserProvider>(context);
-    AppStateProvider app = Provider.of<AppStateProvider>(context);
+    UserProvider authProvider = provider.Provider.of<UserProvider>(context);
+    AppStateProvider app = provider.Provider.of<AppStateProvider>(context);
 
     return Scaffold(
       key: _key,

@@ -5,7 +5,7 @@ import 'package:driver_app/providers/user.dart';
 import 'package:driver_app/widgets/custom_text.dart';
 import 'package:driver_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 
 import 'home.dart';
 import 'login.dart';
@@ -20,8 +20,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider authProvider = Provider.of<UserProvider>(context);
-    AppStateProvider app = Provider.of<AppStateProvider>(context);
+    UserProvider authProvider = provider.Provider.of<UserProvider>(context);
+    AppStateProvider app = provider.Provider.of<AppStateProvider>(context);
 
     return Scaffold(
       key: _key,

@@ -6,7 +6,7 @@ import 'package:driver_app/widgets/custom_btn.dart';
 import 'package:driver_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 
 class RideRequestScreen extends StatefulWidget {
   @override
@@ -18,14 +18,14 @@ class _RideRequestScreenState extends State<RideRequestScreen> {
   void initState() {
     super.initState();
     AppStateProvider _state =
-        Provider.of<AppStateProvider>(context, listen: false);
+        provider.Provider.of<AppStateProvider>(context, listen: false);
     _state.listenToRequest(id: _state.rideRequestModel.id, context: context);
   }
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    AppStateProvider appState = provider.Provider.of<AppStateProvider>(context);
+    UserProvider userProvider = provider.Provider.of<UserProvider>(context);
 
     return SafeArea(
         child: Scaffold(

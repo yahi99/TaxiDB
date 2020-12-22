@@ -594,7 +594,7 @@ class AppStateProvider with ChangeNotifier {
     String id = uuid.v1();
     var dioRespone = Dio();
     await dioRespone.post(
-      apiUrl + '/create_request_on_trip',
+      "http://" + apiUrl + '/create_request_on_trip',
       data: {
         'client_id': user.dbID,
         'start_pos': "$lat : $lng",
@@ -632,7 +632,7 @@ class AppStateProvider with ChangeNotifier {
     lookingForDriver = false;
     var dioResponse = Dio();
     await dioResponse.post(
-      apiUrl + '/cancel_trip_request',
+      "http://" + apiUrl + '/cancel_trip_request',
       data: {
         'callr_id': rideRequestModel.dbID,
       },
@@ -697,7 +697,7 @@ class AppStateProvider with ChangeNotifier {
         lookingForDriver = false;
         var dioResponse = Dio();
         await dioResponse.post(
-          apiUrl + '/cancel_trip_request',
+          "http://" + apiUrl + '/cancel_trip_request',
           data: {
             'callr_id': requestDbId,
           },

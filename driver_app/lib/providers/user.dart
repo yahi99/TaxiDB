@@ -83,7 +83,7 @@ class UserProvider with ChangeNotifier {
         String _deviceToken = await fcm.getToken();
         var dioRequest = Dio();
         await dioRequest.post(
-          apiUrl + '/register_driver_and_car',
+          "http://" + apiUrl + '/register_driver_and_car',
           data: {
             'login': Uuid().v4(),
             'name': name.text.trim(),
