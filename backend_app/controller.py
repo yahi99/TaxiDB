@@ -282,6 +282,26 @@ def get_all_trips_user_controller(session, client_id):
         raise e
 
 
+def get_all_trips_driver_controller(session, driver_id):
+    try:
+        sql = f"select t.trip_id, car_id, invoice_id, trip_distance, trip_start_date, trip_end_date, trip_price, trip_status from trip as t inner join call_request as cr on t.trip_id = cr.trip_id where t.car_id = {driver_id};"
+        all_trips = session.execute(sql)
+        if all_trips.rowcount > 0:
+            data = [{'trip_id': r.trip_id,
+                     'car_id': r.car_id,
+                     'invoice_id': r.invoice_id,
+                     'trip_distance': r.trip_distance,
+                     'trip_start_date': r.trip_start_date,
+                     'trip_end_date': r.trip_end_date,
+                     'trip_price': r.trip_price,
+                     'trip_status': r.trip_status} for r in all_trips]
+            return jsonify(data)
+        else:
+            return jsonify({'msg': 'No trips by that driver'})
+    except Exception as e:
+        raise e
+
+
 def get_all_request_for_specialist_controller(session, specialist_id):
     try:
         sql = f"select st.st_status, st.st_description, st.st_create_date, t.trip_price, cr.callr_pre_price, cr.callr_desired_category, concat(c.client_last_name, ' ', substring(c.client_first_name, 1, 1), '.', substring(c.client_father_name, 1, 1), '.') as client_fio from support_ticket as st inner join trip as t on st.trip_id = t.trip_id inner join call_request as cr on t.trip_id = cr.trip_id inner join client as c on cr.client_id = c.client_id where st.ss_id = {specialist_id};"

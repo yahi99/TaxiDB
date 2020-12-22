@@ -173,6 +173,16 @@ def get_all_trips_user(client_id: int):
     except Exception as e:
         return jsonify({'msg': str(e)})
 
+
+@app.route('/get_all_trips_driver/<int:driver_id>', methods=['GET'])
+def get_all_trips_driver(driver_id: int):
+    try:
+        result = get_all_trips_driver_controller(session, driver_id)
+        return result
+    except Exception as e:
+        return jsonify({'msg': str(e)})
+
+
 @app.route('/get_all_request_for_specialist/<int:specialist_id>', methods=['GET'])
 def get_all_request_for_specialist(specialist_id: int):
     try:
@@ -213,18 +223,19 @@ def cancel_trip_request():
     except Exception as e:
         return jsonify({'msg': str(e)})
 
-@app.after_request
-def add_cors_headers(response):
-    r = request.referrer[:-1]
-    if r in Config.white:
-        response.headers.add('Access-Control-Allow-Origin', r)
-        response.headers.add('Access-Control-Allow-Credentials', 'true')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-        response.headers.add('Access-Control-Allow-Headers', 'Cache-Control')
-        response.headers.add('Access-Control-Allow-Headers', 'X-Requested-With')
-        response.headers.add('Access-Control-Allow-Headers', 'Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-    return response
+
+# @app.after_request
+# def add_cors_headers(response):
+#     r = request.referrer[:-1]
+#     if r in Config.white:
+#         response.headers.add('Access-Control-Allow-Origin', r)
+#         response.headers.add('Access-Control-Allow-Credentials', 'true')
+#         response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+#         response.headers.add('Access-Control-Allow-Headers', 'Cache-Control')
+#         response.headers.add('Access-Control-Allow-Headers', 'X-Requested-With')
+#         response.headers.add('Access-Control-Allow-Headers', 'Authorization')
+#         response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+#     return response
 
 
 if __name__ == '__main__':
