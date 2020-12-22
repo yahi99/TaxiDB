@@ -1,20 +1,20 @@
 import React from 'react';
 import axios from 'axios';
 import ChatBody from './components/chatBody/ChatBody';
-import apiUrl from 'constants';
+import apiUrl from './constatns';
 import './App.css';
 
 function App() {
 
   const [clients, setClients] = React.useState(null)
+  const [data, setData] = React.useState(null)
 
   React.useEffect(() => {
-    axios.get("http://192.168.43.83:5000/" +
-      "get_all_request_for_specialist/" +
+    axios.get(apiUrl +
+      "/get_all_request_for_specialist/" +
       1).then((resp) => {
-        console.log(resp.data);
+        setData(resp.data);
       });
-
   }, []);
 
 
