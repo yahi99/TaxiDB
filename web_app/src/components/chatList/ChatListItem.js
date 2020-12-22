@@ -3,9 +3,8 @@ import Avatar from './Avatar';
 
 export default function ChatListItem({ name,
     animationDelay,
-    active,
-    isOnline,
-    image }) {
+    image,
+    dateCreate }) {
 
     const selectChat = (e) => {
         for (
@@ -23,19 +22,17 @@ export default function ChatListItem({ name,
         <div
             style={{ animationDelay: `0.${animationDelay}s` }}
             onClick={selectChat}
-            className={`chatlist__item ${active ? active : ""
-                } `}
+            className={`chatlist__item`}
         >
             <Avatar
                 image={
                     image ? image : "http://placehold.it/80x80"
                 }
-                isOnline={isOnline}
             />
 
             <div className="userMeta">
                 <p>{name}</p>
-                <span className="activeTime">32 минут назад</span>
+                <span className="activeTime">{dateCreate}</span>
             </div>
         </div>
     )

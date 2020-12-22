@@ -3,3 +3,4 @@ class Config:
     SQLACHEMY_DATABASE_URI = 'postgresql://postgres:testpass@localhost/taxi'
     HOST_URL = '0.0.0.0'
     HOST_PORT = '5000'
+    white = ['http://localhost:3000','http://localhost:9000']
