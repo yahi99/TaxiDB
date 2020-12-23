@@ -1,0 +1,15 @@
+version: '2'
+services: 
+  web:
+    build: ../backend_app/.
+    ports: 
+      - "5000:5000"
+    volumes: 
+      - ../backend_app:/app
+    links: 
+      - postgresdb
+
+  postgresdb:
+    build: postgres
+    ports: 
+      - "5435:5432"
